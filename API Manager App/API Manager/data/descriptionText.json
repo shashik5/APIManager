@@ -1,0 +1,21 @@
+﻿{
+  "_CommonDescriptions": {
+    "_Description": "Description",
+    "_DataType": "DataType",
+    "_InnerFields": "Inner Fields",
+    "_AvailableOptions": "Available Options",
+    "_Arguments": "Arguments",
+    "EnterpriseManager": "Enterprise Manager",
+    "CustomizeMobileApps": "Customize Mobile Apps"
+  },
+  "EnterpriseManager": {
+    "DNAConfiguration": "DNA Configuration",
+    "ImportantMethodsInEM": "Important Methods In Engine",
+    "WidgetConfigurations": "Widget Configurations"
+  },
+  "CustomizeMobileApps": {
+    "DNAConfiguration": "DNA Configuration",
+    "ImportantMethodsInEM": "Important Methods In Engine",
+    "WidgetConfigurations": "Widget Configurations"
+  }
+}

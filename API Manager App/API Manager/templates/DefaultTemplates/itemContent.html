@@ -1,0 +1,74 @@
+﻿#var dataObj = data.dataObj, APIManager=data.APIManager;#
+
+    #if(dataObj['_extends']){#
+        <!-- If dataObj contains '_extents' property then copy the object from the path mentioned in the value field and replaces '_extends' property -->
+        #var stringArray = dataObj['_extends'];
+        delete dataObj['_extends'];
+        dataObj = $.extend({}, APIManager.APIManagerModel.getObjectByPath(APIManager.APIManagerModel.getSelectedDataObject(), stringArray), dataObj);
+    }#
+
+    #if(data.header){#
+        <!-- Printing headers and applying css class depending on header -->
+        #var cssClass='propertyItem';#
+        #(data.header == '_InnerFields' || data.header == '_Arguments') && (data.header = APIManager.APIManagerView.textDescriptor.getDescriptionText(data.header)) && (cssClass='')#
+        <h3 class=#=cssClass# data-name="#=data.header#">#=data.header#</h3>
+    #}#
+
+
+#if(dataObj){#
+<div class="itemContent">
+    #_.each(dataObj, function(value, key){#
+        #if(_.isObject(value) && !_.isArray(value)){#
+            <!-- If value is a object then repeat the above step by loading itemContent template with arguments as value as dataObj and key as header  -->
+            #=APIManager.APIManagerView.templates.renderTemplate('EMTemplates/itemContent.html',{dataObj:value, header:key, APIManager:APIManager})#    <br />
+        #}
+        else if(_.isString(value) && key != '_Note'){#
+            #var pathArray=value.split('.')
+            if((pathArray.length>1) && (pathArray[0]=='_CommonDescriptions')){#
+                <!-- Load object from '_CommonDescriptions' object from path mentioned -->
+                #var commonDescriptionObject = APIManager.APIManagerModel.getObjectByPath(APIManager.APIManagerModel.getSelectedDataObject(), value)#
+                #=APIManager.APIManagerView.templates.renderTemplate('EMTemplates/itemContent.html',{dataObj:commonDescriptionObject, header:key, APIManager:APIManager})#    <br />
+            #}
+            else {#
+                <!-- Printing description key and string -->
+                #var cssClass='',dom='h4';#
+                #(key.charAt(0)=='_') && (key=APIManager.APIManagerView.textDescriptor.getDescriptionText(key))#
+                #if(key=='Type'){
+                    dom='h3';   cssClass='propertyItem';
+                } else {key=key+':-'}#
+                <#=dom# class=#=cssClass#>#=key#</#=dom#><p>#=value#</p> <br />
+            #}#
+        #}
+        else if(_.isString(value) && key == '_Note'){#
+            <!-- Printing _Note string -->
+            <span class="noteHeader">Note: </span><span class="note"><b>#=value#</b></span>  <br />
+        #}
+        else if(_.isArray(value)){#
+            #var itemClass='';
+            if (key=='_AvailableOptions') {
+                key=APIManager.APIManagerView.textDescriptor.getDescriptionText(key)#
+                <!-- Printing _AvailableOptions in the form of list -->
+                <h4>#=key+':-'#</h4>
+                <div class="itemContent">
+                    #_.each(value,function(item,index){#
+                        <span class="arrayItems">#=item#</span><br />
+                    #})#
+                </div>
+            #}
+            else {#
+                <!-- This executes if value is a array and first item is a path in data object and second item is a additional information text -->
+                #var commonDescriptionObject = APIManager.APIManagerModel.getObjectByPath(APIManager.APIManagerModel.getSelectedDataObject(), value[0])#
+                #=APIManager.APIManagerView.templates.renderTemplate('EMTemplates/itemContent.html',{ dataObj:commonDescriptionObject, header:key, additionalText:value, APIManager:APIManager })#    <br />
+            #}#
+        #}#
+    #})#
+
+    #if(data.additionalText){#
+        <!-- Printing additional information -->
+        #for(var i=1;i < data.additionalText.length; i++){#
+            <p class="additionalInformation">#:data.additionalText[i]#</p>
+        #}#
+    #}#
+
+</div>
+#}#
