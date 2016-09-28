@@ -20,14 +20,14 @@
     #_.each(dataObj, function(value, key){#
         #if(_.isObject(value) && !_.isArray(value)){#
             <!-- If value is a object then repeat the above step by loading itemContent template with arguments as value as dataObj and key as header  -->
-            #=APIManager.APIManagerView.templates.renderTemplate('EMTemplates/itemContent.html',{dataObj:value, header:key, APIManager:APIManager})#    <br />
+            #=APIManager.APIManagerView.templates.renderTemplate('DefaultTemplates/itemContent.html',{dataObj:value, header:key, APIManager:APIManager})#    <br />
         #}
         else if(_.isString(value) && key != '_Note'){#
             #var pathArray=value.split('.')
             if((pathArray.length>1) && (pathArray[0]=='_CommonDescriptions')){#
                 <!-- Load object from '_CommonDescriptions' object from path mentioned -->
                 #var commonDescriptionObject = APIManager.APIManagerModel.getObjectByPath(APIManager.APIManagerModel.getSelectedDataObject(), value)#
-                #=APIManager.APIManagerView.templates.renderTemplate('EMTemplates/itemContent.html',{dataObj:commonDescriptionObject, header:key, APIManager:APIManager})#    <br />
+                #=APIManager.APIManagerView.templates.renderTemplate('DefaultTemplates/itemContent.html',{dataObj:commonDescriptionObject, header:key, APIManager:APIManager})#    <br />
             #}
             else {#
                 <!-- Printing description key and string -->
@@ -58,7 +58,7 @@
             else {#
                 <!-- This executes if value is a array and first item is a path in data object and second item is a additional information text -->
                 #var commonDescriptionObject = APIManager.APIManagerModel.getObjectByPath(APIManager.APIManagerModel.getSelectedDataObject(), value[0])#
-                #=APIManager.APIManagerView.templates.renderTemplate('EMTemplates/itemContent.html',{ dataObj:commonDescriptionObject, header:key, additionalText:value, APIManager:APIManager })#    <br />
+                #=APIManager.APIManagerView.templates.renderTemplate('DefaultTemplates/itemContent.html',{ dataObj:commonDescriptionObject, header:key, additionalText:value, APIManager:APIManager })#    <br />
             #}#
         #}#
     #})#

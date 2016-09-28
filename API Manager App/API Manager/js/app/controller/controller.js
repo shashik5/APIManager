@@ -30,7 +30,9 @@
 
                 // loadContentPage method is called if 'href' attribute of current target element starts with '#'.
                 if (newHash) {
-                    me.APIManagerEvents[menuName] ? me.APIManagerEvents[menuName].call(me, e, newHash, { isPrimaryObjectPathChanged: utils.isPrimaryObjectPathChanged(newHash, prevHash) }) : (console.warn('There is no Event handler defined for this module!!!'), this.APIManagerEvents.Default.call(this, null, hashPath, { isPrimaryObjectPathChanged: true }));
+                    me.APIManagerEvents[menuName] ? me.APIManagerEvents[menuName].call(me, e, newHash, { isPrimaryObjectPathChanged: utils.isPrimaryObjectPathChanged(newHash, prevHash) }) : (console.warn('There is no Event handler defined for this module!!!'), this.APIManagerEvents.Default.call(this, null, newHash, { isPrimaryObjectPathChanged: true }));
+
+                    me.APIManager.APIManagerView.expandSubMenu(newHash);
                 };
             }
             catch (error) {
@@ -57,6 +59,8 @@
         if (hashPath) {
             // Pass hashPath as argument to loadContentPage method.
             this.APIManagerEvents[menuName] ? this.APIManagerEvents[menuName].call(this, null, hashPath, { isPrimaryObjectPathChanged: true }) : (console.warn('There is no Event handler defined for this module!!!'), this.APIManagerEvents.Default.call(this, null, hashPath, { isPrimaryObjectPathChanged: true }));    // Here 'null' is passed beacuse method is not called by event handler.
+
+            this.APIManager.APIManagerView.expandSubMenu(hashPath);
         };
     };
 

@@ -1,5 +1,16 @@
 ﻿define(['app/view/templateStore', 'app/view/textDescriptor'], function (templateStore, textDescriptor) {
 
+    var expandHandler = {
+        treeview: function (path) { // TODO: Implementation incomplete.
+            var subMenu = this.menuElement.getKendoTreeView(),
+                $itemToBeExpanded = subMenu.element.find('a[href="' + '#' + path + '"]').closest('.k-item');
+
+            subMenu.expand($itemToBeExpanded);
+        },
+        menu: function (path) { },
+        panelbar: function (path) { }
+    };
+
     // View Class.
     var View = function (Args) {
         this.$container = $(Args.container);
@@ -144,18 +155,25 @@
 
     // Method to display alert message on popup window. It takes two arguments, message to be displayed and title for the message window.
     View.prototype.displayMessage = function (message, title) {
-        this.messageWindow.content(message);    // Load content text or HTML.
+        this.messageWindow.content('<span>' + message + '</span>');    // Load content text or HTML.
         this.messageWindow.setOptions({     // Set title to message window.
             title: title || 'Atert!!!'
         });
         this.messageWindow.open().center();  // Open message window and set position to center.
     };
 
+    // Method to highlight active menu item.
     View.prototype.markSelectedMainMenu = function (menuName) {
         var selectedClass = 'selected',
             $selectedMenuItem = this.mainMenuElement.find('.k-item .k-link[href="?menu=' + menuName + '"]').closest('.k-item');
 
         $selectedMenuItem.addClass(selectedClass);
+    };
+
+    View.prototype.expandSubMenu = function (path) {
+        var menuType = this.menuElement.data('role');
+
+        expandHandler[menuType] && expandHandler[menuType].call(this, path);
     };
 
     return View;
