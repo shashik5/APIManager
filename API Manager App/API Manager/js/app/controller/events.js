@@ -1,4 +1,4 @@
-﻿define([], function () {
+﻿define(function () {
 
     // Utility object, where miscellaneous methods are written, these methods are used by event handlers.
     var utils = {
@@ -23,6 +23,23 @@
             primaryLink = primaryLink.join('.');
 
             return { 'primaryLink': primaryLink, 'secondaryLink': secondaryLink, 'scrollToProperty': linkArray[linkArray.length - 1], 'templatePath': link }
+        },
+
+        // Method to compare url of current page and href and returns boolean value.
+        isPrimaryObjectPathChanged: function (newHash, prevHash) {
+            var newHashArray = [], prevHashArray = [];
+
+            // Returns 'true' if newHash is undefined or doesn't matches with prevHash.
+            if (!newHash) return true;
+            newHashArray = newHash.split('.');
+            prevHashArray = prevHash.split('.');
+            for (var i = 0; i < 2; i++) {
+                if (newHashArray[i] != prevHashArray[i]) {
+                    return true;
+                };
+            };
+
+            return false;
         }
     },
 
@@ -64,8 +81,14 @@
                 .addClass('externalLink');
         };
 
-    // Object where all event Handlers are defined.
+    // Object where all event Handlers are defined. Handlers will be executed with controller context.
     var eventHandlers = {
+
+        // Default Handler Method to load required content on page.
+        Default: function (e, contentPath, options) {
+            // Call loadMainContent to load content.
+            loadMainContent.call(this, _.extend({}, { 'APIManager': this.APIManager, 'e': e, 'templatePath': this.APIManager.appSettings.getAppSettings().TemplatePath, 'contentPath': contentPath }, options));
+        },
 
         // Method to load required content on page.
         EnterpriseManager: function (e, contentPath, options) {
@@ -73,10 +96,26 @@
             loadMainContent.call(this, _.extend({}, { 'APIManager': this.APIManager, 'e': e, 'templatePath': this.APIManager.appSettings.getAppSettings().TemplatePath, 'contentPath': contentPath }, options));
         },
 
-        // Default Handler Method to load required content on page.
-        Default: function (e, contentPath, options) {
-            // Call loadMainContent to load content.
-            loadMainContent.call(this, _.extend({}, { 'APIManager': this.APIManager, 'e': e, 'templatePath': this.APIManager.appSettings.getAppSettings().TemplatePath, 'contentPath': contentPath }, options));
+        // Method to handle hash changed event.
+        hashChanged: function (e) {
+            var me = this;
+            try {
+                var mainMenuName = document.URL.match(/([?]menu)*?=[^&#]*/g),
+                    menuName = mainMenuName ? mainMenuName[0].split('=')[1] : me.APIManager.appSettings.getAppSettings().DefaultMainMenu,
+                    prevHash = e.prevHash,
+                    newHash = e.newHash;
+
+                // loadContentPage method is called if 'href' attribute of current target element starts with '#'.
+                if (newHash) {
+                    eventHandlers[menuName] ? eventHandlers[menuName].call(me, e, newHash, { isPrimaryObjectPathChanged: utils.isPrimaryObjectPathChanged(newHash, prevHash) }) : (console.warn('There is no Event handler defined for this module!!!'), eventHandlers.Default.call(this, null, newHash, { isPrimaryObjectPathChanged: true }));
+
+                    me.APIManager.APIManagerView.expandSubMenu(newHash);
+                };
+            }
+            catch (error) {
+                console.error(error);
+                me.APIManager.APIManagerView.displayMessage('Error occured while loading content. Please check console for more details!!!');
+            };
         }
     };
 

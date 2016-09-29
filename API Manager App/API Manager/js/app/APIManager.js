@@ -1,12 +1,12 @@
 ﻿define('APIManagerApp', ['app/model/model', 'app/view/view', 'app/controller/controller', 'app/settingsManager'], function (Model, View, Controller, SettingsManager) {
 
     // API Manager Application.
-    var APIManager = function () {
+    var APIManager = function (container) {
 
         this.appSettings = new SettingsManager();
 
         // Instantiation of Model, View and Controller.
-        this.APIManagerView = new View({ APIManager: this, container: document.body });
+        this.APIManagerView = new View({ APIManager: this, container: container || document.body });
         this.APIManagerModel = new Model({ APIManager: this, moduleDataPath: this.appSettings.getAllModulesPath() });
         this.APIManagerController = new Controller({ APIManager: this });
     };

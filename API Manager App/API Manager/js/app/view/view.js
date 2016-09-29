@@ -1,15 +1,45 @@
 ﻿define(['app/view/templateStore', 'app/view/textDescriptor'], function (templateStore, textDescriptor) {
 
-    var expandHandler = {
-        treeview: function (path) { // TODO: Implementation incomplete.
-            var subMenu = this.menuElement.getKendoTreeView(),
-                $itemToBeExpanded = subMenu.element.find('a[href="' + '#' + path + '"]').closest('.k-item');
+    // Utility object, where miscellaneous methods are written, these methods are used by expandHandlers.
+    var utils = {
+        // Method to expand treeview and panelbar list.
+        expandList: function (subMenu, path) {
+            var pathArray = null,
+                $itemToBeExpanded = subMenu.element;
 
-            subMenu.expand($itemToBeExpanded);
-        },
-        menu: function (path) { },
-        panelbar: function (path) { }
-    };
+            path = path || '';
+            pathArray = path.split('.');
+
+            // Parse path string and expand list.
+            for (var index = 0; index < pathArray.length - 1; index++) {
+                var searchPath = '';
+
+                searchPath = pathArray.slice(0, index + 1).join('.');
+
+                $itemToBeExpanded = $itemToBeExpanded.find('a[href="#' + searchPath + '"]').closest('.k-item');
+                subMenu.expand($itemToBeExpanded);
+            };
+
+            // Mark as selected and return the list item.
+            return $itemToBeExpanded.find('a[href="#' + path + '"]').addClass('k-state-selected').closest('.k-item');
+        }
+    },
+        // Object where expand handlers are written.
+        expandHandler = {
+            // Method to expand treeview item.
+            treeview: function (path) { // TODO: Implementation incomplete.
+                var subMenu = this.menuElement.getKendoTreeView();
+                subMenu.select(utils.expandList(subMenu, path));
+            },
+
+            menu: function (path) { },
+
+            // Method to expand panelbar item.
+            panelbar: function (path) {
+                var subMenu = this.menuElement.getKendoPanelBar();
+                subMenu.select(utils.expandList(subMenu, path));
+            }
+        };
 
     // View Class.
     var View = function (Args) {

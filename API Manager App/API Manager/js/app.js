@@ -8,7 +8,7 @@ requirejs.config({
         underscore: 'lib/underscore-min',
         nicescroll: 'lib/nicescroll',
         APIManagerApp: 'app/APIManager',
-        hashHandler:'lib/hashHandler'
+        hashHandler: 'lib/hashHandler'
     },
     shim: {
         'APIManagerApp': {
@@ -22,8 +22,8 @@ requirejs.config({
 });
 
 require(['APIManagerApp'], function (APIManagerApp) {
-    
+
     //Start APIManager app
-    var APIManager = new APIManagerApp();
+    var APIManager = new APIManagerApp(document.body);
     APIManager.start();
 });
