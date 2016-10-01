@@ -5,7 +5,7 @@
         this.APIManager = Args.APIManager;
 
         // Initialize HashHandler.
-        hashHandler.addHandler($.proxy(events.hashChanged, this));
+        hashHandler.changed.addHandler($.proxy(events.hashChanged, this));
         hashHandler.start();
     };
 

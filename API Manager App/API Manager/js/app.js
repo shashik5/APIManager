@@ -8,7 +8,7 @@ requirejs.config({
         underscore: 'lib/underscore-min',
         nicescroll: 'lib/nicescroll',
         APIManagerApp: 'app/APIManager',
-        hashHandler: 'lib/hashHandler'
+        hashHandler: 'lib/hashHandler.min'
     },
     shim: {
         'APIManagerApp': {

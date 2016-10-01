@@ -65,7 +65,7 @@
     <Content Include="js\app\settingsManager.js" />
     <Content Include="js\app\view\templateStore.js" />
     <Content Include="js\app\view\textDescriptor.js" />
-    <Content Include="js\lib\hashHandler.js" />
+    <Content Include="js\lib\hashHandler.min.js" />
     <Content Include="js\lib\jquery-2.2.2.min.js" />
     <Content Include="js\lib\kendo.all.min.map" />
     <Content Include="js\lib\underscore-min.js" />
