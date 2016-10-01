@@ -313,7 +313,7 @@
     },
     "UrlId": "_CommonDescriptions.UrlId"
   },
-  "ImportantMethodsInEM": {
+  "ImportantMethodsInEngine": {
     "Model": {
       "getBlock": {
         "_Description": "getBlock method is use to get the block id eg 'EMMain' from the ViewModel object and return the values to calling methods",
@@ -1739,6 +1739,23 @@
             "_DataType": "Integer"
           }
         }
+      }
+    }
+  },
+  "ModuleDocumentation": {
+    "eFormsSettings": {
+      "_Description": "Module to manage global lavel form data and settings, which can be used across all forms in App Builder.",
+      "ValidationMask": {
+        "_Description": "Use this page to create an expression to validate user input in a form field. You can create validation for a specific field, such as comparing the input against specific values, or you can create a category of fields, like a telephone number format that is valid for your region or organization."
+      },
+      "FileTypeGroup": {
+        "_Description": "A File Type Group is a list of related file extensions. You can use this list as a filter when users upload files, For Example, using the File Upload control in the Form Designer."
+      },
+      "SharedList": {
+        "_Description": "Use this page to create groups of list items that you can use in list type form controls in the Form Designer. For example, you can use this page to create a list of cities where your organizations offices are located, that could populate a list in a form for a user to select his home office."
+      },
+      "LanguageEditor": {
+        "_Description": "Use this screen to add language files that you can use in your form controls. You can specify the keys from these files to add locale text to your eForm. For example, you can change the Save button text in a language that the user selects, such as Chinese or French."
       }
     }
   }
