@@ -10,12 +10,18 @@
   },
   "EnterpriseManager": {
     "DNAConfiguration": "DNA Configuration",
-    "ImportantMethodsInEM": "Important Methods In Engine",
-    "WidgetConfigurations": "Widget Configurations"
+    "ImportantMethodsInEngine": "Important Methods In Engine",
+    "WidgetConfigurations": "Widget Configurations",
+    "ModuleDocumentation": "Module Documentation",
+    "eFormsSettings": "eForms Settings",
+    "ValidationMask": "Validation Mask",
+    "FileTypeGroup": "File Type Group",
+    "SharedList": "Shared List",
+    "LanguageEditor": "Language Editor"
   },
   "CustomizeMobileApps": {
     "DNAConfiguration": "DNA Configuration",
-    "ImportantMethodsInEM": "Important Methods In Engine",
+    "ImportantMethodsInEngine": "Important Methods In Engine",
     "WidgetConfigurations": "Widget Configurations"
   }
 }
