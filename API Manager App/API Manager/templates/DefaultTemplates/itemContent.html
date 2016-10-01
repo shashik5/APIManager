@@ -10,7 +10,8 @@
     #if(data.header){#
         <!-- Printing headers and applying css class depending on header -->
         #var cssClass='propertyItem';#
-        #(data.header == '_InnerFields' || data.header == '_Arguments') && (data.header = APIManager.APIManagerView.textDescriptor.getDescriptionText(data.header)) && (cssClass='')#
+        #(data.header == '_InnerFields' || data.header == '_Arguments') && (cssClass='')#
+        #data.header = APIManager.APIManagerView.textDescriptor.getDescriptionText(data.header);#
         <h3 class=#=cssClass# data-name="#=data.header#">#=data.header#</h3>
     #}#
 
