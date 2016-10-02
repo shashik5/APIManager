@@ -1755,7 +1755,24 @@
         "_Description": "Use this page to create groups of list items that you can use in list type form controls in the Form Designer. For example, you can use this page to create a list of cities where your organizations offices are located, that could populate a list in a form for a user to select his home office."
       },
       "LanguageEditor": {
-        "_Description": "Use this screen to add language files that you can use in your form controls. You can specify the keys from these files to add locale text to your eForm. For example, you can change the Save button text in a language that the user selects, such as Chinese or French."
+        "_Description": "Use this screen to add language files that you can use in your form controls. You can specify the keys from these files to add locale text to your eForm. For example, you can change the Save button text in a language that the user selects, such as Chinese or French.",
+        "_Prerequisites": "Statndard template in json format should be present in database with file name 'GLOBALIZATIONTEMPLATE_STANDARD:{F09E4B16-466D-41a7-8EC2-0936D9D5DDE1}'.",
+        "TemplateFiles": {
+          "_Description": "Template files which contains keys and default values for globalization. File name will be constant.",
+          "StandardTemplate": {
+            "_Description": "Template files which contains keys and default values for globalization.",
+            "_FileName": "GLOBALIZATIONTEMPLATE_STANDARD:{F09E4B16-466D-41a7-8EC2-0936D9D5DDE1}"
+          },
+          "CustomTemplate": {
+            "_Description": "Template files which contains keys and default values for globalization.",
+            "_FileName": "GLOBALIZATIONTEMPLATE_CUSTOM:{F09E4B16-466D-41a7-8EC2-0936D9D5DDE1}"
+          }
+        },
+        "ToLoadLanguageList": {
+          "_Description": "To display all available languages list in list view. This API returns all available languages metadata along with standard and custom template file metadata. Once the response is received from this API, standard and custom template file ID will be store in a variable and befor creating data source from response, both templates objects are removed from response, thus data source will contain only language files metadata.",
+          "_APIName": "Extension/GetGlobalAppFilesByContentType",
+          "_Note": "This API returns only file metadata, to get file contents use 'extension/GetApplicationFileWithContents/<fileId>' API."
+        }
       }
     }
   }

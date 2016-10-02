@@ -5,6 +5,9 @@
     "_InnerFields": "Inner Fields",
     "_AvailableOptions": "Available Options",
     "_Arguments": "Arguments",
+    "_APIName": "API Name",
+    "_Prerequisites": "Prerequisites",
+    "_FileName": "File Name",
     "EnterpriseManager": "Enterprise Manager",
     "CustomizeMobileApps": "Customize Mobile Apps"
   },
@@ -17,7 +20,11 @@
     "ValidationMask": "Validation Mask",
     "FileTypeGroup": "File Type Group",
     "SharedList": "Shared List",
-    "LanguageEditor": "Language Editor"
+    "LanguageEditor": "Language Editor",
+    "TemplateFiles": "Template Files",
+    "StandardTemplate": "Standard Template",
+    "CustomTemplate": "Custom Template",
+    "ToLoadLanguageList": "To Load Language List"
   },
   "CustomizeMobileApps": {
     "DNAConfiguration": "DNA Configuration",
