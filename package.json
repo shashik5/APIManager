@@ -1,0 +1,28 @@
+{
+  "name": "apimanager",
+  "version": "1.0.0",
+  "description": "Application to manage and create appliaction document and APIs.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/scorpionsk5/APIManager.git"
+  },
+  "keywords": [
+    "API",
+    "Manager",
+    "documentation",
+    "app"
+  ],
+  "author": "Shashi Kumar D",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/scorpionsk5/APIManager/issues"
+  },
+  "homepage": "https://github.com/scorpionsk5/APIManager#readme",
+  "dependencies": {
+    "minify": "^2.0.11"
+  }
+}
