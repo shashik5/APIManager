@@ -1764,7 +1764,7 @@
             "_FileName": "GLOBALIZATIONTEMPLATE_STANDARD:{F09E4B16-466D-41a7-8EC2-0936D9D5DDE1}"
           },
           "CustomTemplate": {
-            "_Description": "Template files which contains keys and default values for globalization. File name will be constant.",
+            "_Description": "Template files which contains keys and default values for globalization. File name will be constant. This file will be created at runtime if doesn't exist.",
             "_FileName": "GLOBALIZATIONTEMPLATE_CUSTOM:{F09E4B16-466D-41a7-8EC2-0936D9D5DDE1}"
           },
           "LanguageFile": {
@@ -1773,9 +1773,24 @@
           }
         },
         "ToLoadLanguageList": {
-          "_Description": "To display all available languages list in list view. This API returns all available languages metadata along with standard and custom template file metadata. Once the response is received from this API, standard and custom template file ID will be store in a variable and befor creating data source from response, both templates objects are removed from response, thus data source will contain only language files metadata.",
-          "_APIName": "Extension/GetGlobalAppFilesByContentType",
-          "_Note": "This API returns only file metadata, to get file contents use 'extension/GetApplicationFileWithContents/{fileId}' API."
+          "_Description": [ "To display all available languages list in list view. This API returns all available languages metadata along with standard and custom template file metadata.", "Once the response is received from this API, standard and custom template file ID will be store in a variable and befor creating data source from response, both templates objects are removed from response, thus data source will contain only language files metadata.", "The text visible in the list is from displayName property of language file.", "Default language is marked with '(default)' text in the list and isDefault property is set 'true'." ],
+          "_APIUsed": [ "'Extension/GetGlobalAppFilesByContentType' - API to get list of translation files along with template files.", "'Admin/GetLocale' - API to get default language code." ],
+          "_Note": "This API returns only file metadata, to get file contents use 'Extension/GetGlobalAppFile/{fileId}' API."
+        },
+        "ToViewAndUpdateLanguageData": {
+          "_Description": [ "On select of a language in list view, editor panel is opened, where key, defaults value and current language values are displayed.", "Three API calls are made to get contents of standard template, custom templates and language file. Template file IDs are stored in a variable when language list is loaded, language file ID can be fetched from selected item form available languages list view.", "All three responses are merged together to create a data source that will be binded to editor.", "On click of save button language file is updated in server. When default language file is updated, it also updates standard and custom template files.", "In custom key tab, adding and deleting custom keys is only possible in default language." ],
+          "_APIUsed": "'Extension/GetGlobalAppFile/{fileId}' - API to get file data along with its contents.",
+          "_Note": "Both template files are fetched by making API calls whenever a selection is made on available languages list, so that we get latest template files for editing language."
+        },
+        "ToAddNewLanguage": {
+          "_Description": [ "To add new language file in database for globalization which will be used in app builder forms.", "Language selection comboBox contains all supported languages, except languages which are already added.", "File name will be 'Global_{language_code}'", "Custom display name can be given to each file which will be displayed in available languages list.", "Once standard and custom templates are fetched from server, editor will be loaded with data prefilled in it. Current values will be same as default values initially.", "On click of save button language file is created and saved in server.", "In custom key tab, adding and deleting custom keys is only possible in default language." ],
+          "_APIUsed": [ "'Workflow/GetCustomAttr/PREDEFINEDSTATICLIST:%7BF09E4B16-466D-41a7-8EC2-0936D9D5DDE1%7D' - API to get all supported langauges list.", "'Extension/AddGlobalAppFile' - API to add new language file in database." ],
+          "_Note": "If there is no language file exists in database then language selection comboBox will default to application default language. To get default language 'Admin/GetLocale' API call is made."
+        },
+        "ToDeleteLanguage": {
+          "_Description": "To delete the selected language file from server.",
+          "_APIUsed": "'Extension/DeleteGlobalAppFile/{fileId}' - API to delete the file associated with the mentioned FileID.",
+          "_Note": "Default language cannot be deleted."
         }
       }
     }

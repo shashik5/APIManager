@@ -1,4 +1,4 @@
-﻿#var dataObj = data.dataObj, APIManager=data.APIManager;#
+﻿#var dataObj = data.dataObj, APIManager = data.APIManager;#
 
     #if(dataObj['_extends']){#
         <!-- If dataObj contains '_extents' property then copy the object from the path mentioned in the value field and replaces '_extends' property -->
@@ -9,10 +9,13 @@
 
     #if(data.header){#
         <!-- Printing headers and applying css class depending on header -->
-        #var cssClass='propertyItem', displayText='';#
+        #var cssClass='propertyItem', displayText='', dom='h3';#
         #(data.header == '_InnerFields' || data.header == '_Arguments') && (cssClass='')#
         #displayText = APIManager.APIManagerView.textDescriptor.getDescriptionText(data.header);#
-        <h3 class=#=cssClass# data-name="#=data.header#">#=displayText#</h3>
+
+        <!-- If dataObj is boolean value 'true' then header should be displayed as descriptive field header -->
+        #(dataObj === true) && (displayText += ':-', dom = 'h4', cssClass = '')#
+        <#=dom# class=#=cssClass# data-name="#=data.header#">#=displayText#</#=dom#>
     #}#
 
 
@@ -58,16 +61,17 @@
             #}
             else {#
                 <!-- This executes if value is a array and first item is a path in data object and second item is a additional information text -->
-                #var commonDescriptionObject = APIManager.APIManagerModel.getObjectByPath(APIManager.APIManagerModel.getSelectedDataObject(), value[0])#
-                #=APIManager.APIManagerView.templates.renderTemplate('DefaultTemplates/itemContent.html',{ dataObj:commonDescriptionObject, header:key, additionalText:value, APIManager:APIManager })#    <br />
+                #var commonDescriptionObject = value[0].indexOf('_CommonDescriptions') == 0 ? APIManager.APIManagerModel.getObjectByPath(APIManager.APIManagerModel.getSelectedDataObject(), value[0]) : true#
+                #=APIManager.APIManagerView.templates.renderTemplate('DefaultTemplates/itemContent.html',{ dataObj:commonDescriptionObject, header: key, additionalText: value, APIManager: APIManager })#    <br />
             #}#
         #}#
     #})#
 
     #if(data.additionalText){#
+        #var startIndex = (dataObj === true) ? 0 : 1#
         <!-- Printing additional information -->
-        #for(var i=1;i < data.additionalText.length; i++){#
-            <p class="additionalInformation">#:data.additionalText[i]#</p>
+        #for(i = startIndex; i < data.additionalText.length; i++){#
+            <p class="additionalInformation">#:data.additionalText[i]#</p><br />
         #}#
     #}#
 

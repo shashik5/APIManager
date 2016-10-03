@@ -5,7 +5,7 @@
     "_InnerFields": "Inner Fields",
     "_AvailableOptions": "Available Options",
     "_Arguments": "Arguments",
-    "_APIName": "API Name",
+    "_APIUsed": "API Used",
     "_Prerequisites": "Prerequisites",
     "_FileName": "File Name",
     "EnterpriseManager": "Enterprise Manager",
@@ -24,7 +24,10 @@
     "LanguageFile": "Language File",
     "StandardTemplate": "Standard Template",
     "CustomTemplate": "Custom Template",
-    "ToLoadLanguageList": "To Load Language List"
+    "ToLoadLanguageList": "To Load Language List",
+    "ToViewAndUpdateLanguageData": "To View and Update Language Data",
+    "ToAddNewLanguage": "To Add a New Language",
+    "ToDeleteLanguage": "To Delete a Language"
   },
   "CustomizeMobileApps": {
     "DNAConfiguration": "DNA Configuration",

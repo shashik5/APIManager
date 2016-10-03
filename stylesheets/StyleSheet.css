@@ -83,6 +83,8 @@ body {
 }
 
 .additionalInformation {
+    min-height: 1px;
+    display: block;
     margin-top: -15px;
 }
 
