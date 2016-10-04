@@ -96,7 +96,6 @@
 
         // method to start publish process.
         startPublish = function (destinationPath) {
-            console.log(destinationPath);
             processFolder(sourcePath, destinationPath);
         };
 
