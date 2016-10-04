@@ -111,6 +111,6 @@
     }
     catch (err) {
         logger(err.message);
-    }
+    };
 
 })(require, process);
