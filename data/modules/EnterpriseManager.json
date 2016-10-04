@@ -410,7 +410,7 @@
         "_Description": "route method is use to route the control to diffrent file for execution",
         "_Arguments": {
           "Route": "this arg holds the route file path",
-          "Args": "this arg will hold the objects"
+          "Args": "this arg will hold configurations and arguments to be passed to routed event."
 
         }
       }
