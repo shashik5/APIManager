@@ -13,7 +13,7 @@
         foldersToIgnore = ['node_modules', 'build', '.git', 'tools'],
 
         // Array of file names which should not be published.
-        filesToIgnore = ['publish.bat', '.gitattributes', '.gitignore', 'build.bat'],
+        filesToIgnore = ['publish.bat', '.gitattributes', '.gitignore', 'build.bat', 'package.json'],
 
         // Method to handle log messages.
         logger = function (msg) {
