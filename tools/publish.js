@@ -102,7 +102,11 @@
     // Publish process is initiated from here.
     try {
         var destinationPath = process.argv[2] ? process.argv[2].replace('"', '') : dir.replace('tools', 'build');
+
+        // Initialize destination directory.
         createDirectory(destinationPath);
+
+        // Start publishing.
         startPublish(destinationPath);
     }
     catch (err) {
