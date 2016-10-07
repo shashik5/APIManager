@@ -24,7 +24,7 @@
         createDirectory = function (folderPath) {
             if (!fs.existsSync(folderPath)) {
                 fs.mkdirSync(folderPath);
-                logger(folderPath + ' - directory created because it didn\'t exist.');
+                logger(folderPath + ' - directory created because it didn\'t exist in destination.');
             };
         },
 
@@ -82,7 +82,7 @@
                                 logger(err.message);
                             }
                             else {
-                                logger(src + ' - file minified and copied.');
+                                logger(src + ' - file minified and published.');
                             };
                         });
                     };
@@ -90,7 +90,7 @@
             }
             else {
                 // Copy non JavaScript files to destination.
-                (filesToIgnore.indexOf(item) == -1) && (fs.createReadStream(src).pipe(fs.createWriteStream(dest)), logger(src + ' - file copied.'));
+                (filesToIgnore.indexOf(item) == -1) && (fs.createReadStream(src).pipe(fs.createWriteStream(dest)), logger(src + ' - file published.'));
             };
         },
 
