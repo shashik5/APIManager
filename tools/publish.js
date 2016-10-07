@@ -94,7 +94,7 @@
             };
         },
 
-        // method to start publish process.
+        // Method to start publish process.
         startPublish = function (destinationPath) {
             processFolder(sourcePath, destinationPath);
         };
