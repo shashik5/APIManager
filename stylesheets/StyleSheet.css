@@ -103,9 +103,27 @@ body {
     color: rgb(0, 148, 255);
 }
 
-.mainMenuElement {
+.mainMenuContainer {
     border-radius: 10px 10px 0 0;
     overflow: hidden;
+    border: solid 1px #c5c5c5;
+    background-color: #e3e3e3;
+    background-image: none,linear-gradient(to bottom,rgba(255,255,255,.6) 0,rgba(255,255,255,.0) 100%);
+}
+
+    .mainMenuContainer .exportControl {
+        display: inline-block;
+        width: 25px;
+        height: 25px;
+        margin: 6px 0 0 20px;
+        background-image: url(../stylesheets/sprites/icons.png);
+        background-position: -28px -1px;
+    }
+
+.mainMenuElement {
+    width: calc(100% - 60px);
+    border: none;
+    float: left;
 }
 
     .mainMenuElement a {

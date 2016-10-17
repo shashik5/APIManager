@@ -43,6 +43,7 @@
 
     // View Class.
     var View = function (Args) {
+        var me = this;
         this.$container = $(Args.container);
         this.APIManager = Args.APIManager;
         this.textDescriptor = textDescriptor;
@@ -56,6 +57,12 @@
             console.error(err);
             this.displayMessage('Error occured while registering templates. Please check console for more details!!!');
         };
+
+        // Initialize click event listener.
+        this.$container.on('click', function (e) {
+            var dataAction = $(e.target).data('action');
+            dataAction && me.APIManager.APIManagerController.triggerEvent(dataAction, e);
+        });
     };
 
     // Method to initialize page by create required containers and widgetize them.
@@ -66,7 +73,7 @@
         // Main Header element.
         $('<h1>').addClass('mainHeader').text(this.APIManager.appSettings.getAppSettings().AppHeader || "API").appendTo($('<div>').addClass('headerContainer').appendTo(this.$container));
 
-        this.mainMenuElement = $('<div>').addClass('mainMenuElement').appendTo(this.$container);
+        this.mainMenuContainer = $('<div>').addClass('mainMenuContainer').append([$('<div>').addClass('mainMenuElement'), $('<span>').addClass('exportControl').data('action', 'exportToFile').attr('title', 'Export To File')]).appendTo(this.$container);
 
         // Container element which will be widgetized to kendoSplitter.
         var $spliterPanel = $('<div>')
@@ -162,7 +169,7 @@
             dataSource: menuData
         };
 
-        this.mainMenuElement.kendoMenu(options);
+        this.mainMenuContainer.find('.mainMenuElement').kendoMenu(options);
     };
 
     // Method to Adjust scroll to display the required property. It take one argument, data name of the element to be scrolled.
@@ -195,7 +202,7 @@
     // Method to highlight active menu item.
     View.prototype.markSelectedMainMenu = function (menuName) {
         var selectedClass = 'selected',
-            $selectedMenuItem = this.mainMenuElement.find('.k-item .k-link[href="?menu=' + menuName + '"]').closest('.k-item');
+            $selectedMenuItem = this.mainMenuContainer.find('.mainMenuElement .k-item .k-link[href="?menu=' + menuName + '"]').closest('.k-item');
 
         $selectedMenuItem.addClass(selectedClass);
     };

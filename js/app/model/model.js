@@ -147,6 +147,11 @@ define(function () {
             return function () {
                 return moduleData;
             }
+        },
+
+        getDataToExport: function (dataPath) {
+            var data = this.getSelectedDataObject();
+            return dataPath ? this.getObjectByPath(data, dataPath) : data;
         }
     };
 
@@ -218,6 +223,10 @@ define(function () {
     // Method that will return currently selected module's data.
     Model.prototype.getSelectedDataObject = function () {
         return selectedObject;
+    };
+
+    Model.prototype.buildFileToExport = function (dataPath) {
+        var dataToExport = modelUtils.getDataToExport.call(this, dataPath);
     };
 
     return Model;

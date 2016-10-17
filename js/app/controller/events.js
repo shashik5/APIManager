@@ -116,6 +116,10 @@
                 console.error(error);
                 me.APIManager.APIManagerView.displayMessage('Error occured while loading content. Please check console for more details!!!');
             };
+        },
+
+        exportToFile: function (e) {
+            debugger;
         }
     };
 

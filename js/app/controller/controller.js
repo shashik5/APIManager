@@ -21,5 +21,9 @@
         };
     };
 
+    Controller.prototype.triggerEvent = function (eventName, eventArguments) {
+        events[eventName] && events[eventName].call(this, eventArguments);
+    };
+
     return Controller;
 });
