@@ -92,12 +92,20 @@ body {
     color: rgb(0, 44, 255);
 }
 
-.messageWindow {
-    color: red;
-    text-align: center;
-    vertical-align: middle;
-    line-height: 100px;
+.ErrorWindow {
+    color: red !important;
+    text-align: center !important;
+    vertical-align: middle !important;
+    line-height: 100px !important;
 }
+
+.popUpWindow {
+    color: rgb(128, 128, 128);
+}
+
+    .popUpWindow .exportFormContainer {
+        padding: 5px;
+    }
 
 .k-window-title {
     color: rgb(0, 148, 255);

@@ -1,5 +1,5 @@
 ﻿define([], function () {
-    
+
     var TemplateCache = {}, // kendo template functions.
 
         // Method to make ajax call and fetch template.
@@ -15,7 +15,7 @@
 
     // Template store class.
     var templateStore = function () {
-        
+
     };
 
     // Method to convert template html string to kendo template function.
@@ -29,7 +29,7 @@
     templateStore.prototype.compileTemplate = function (template) {
         return kendo.template(template);
     };
-    
+
     // Method to get template by making ajax calls.
     templateStore.prototype.getTemplate = function (templateId) {
         var me = this;
@@ -48,6 +48,7 @@
 
     // Method to render template by executing compiled template with data as argument.
     templateStore.prototype.renderTemplate = function (templateId, data) {
+        data = data || {};
         return this.getTemplate(templateId)(data);
     };
 

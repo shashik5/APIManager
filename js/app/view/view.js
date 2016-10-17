@@ -68,12 +68,12 @@
     // Method to initialize page by create required containers and widgetize them.
     View.prototype.initializeView = function () {
 
-        var scrollBarColor = 'rgb(196, 196, 196)', messageWindow = $('<div>').addClass('messageWindow');
+        var scrollBarColor = 'rgb(196, 196, 196)', $windowContainer = $('<div>').addClass('popUpWindow');
 
         // Main Header element.
         $('<h1>').addClass('mainHeader').text(this.APIManager.appSettings.getAppSettings().AppHeader || "API").appendTo($('<div>').addClass('headerContainer').appendTo(this.$container));
 
-        this.mainMenuContainer = $('<div>').addClass('mainMenuContainer').append([$('<div>').addClass('mainMenuElement'), $('<span>').addClass('exportControl').data('action', 'exportToFile').attr('title', 'Export To File')]).appendTo(this.$container);
+        this.mainMenuContainer = $('<div>').addClass('mainMenuContainer').append([$('<div>').addClass('mainMenuElement'), $('<span>').addClass('exportControl').data('action', 'loadExportWindow').attr('title', 'Export To File')]).appendTo(this.$container);
 
         // Container element which will be widgetized to kendoSplitter.
         var $spliterPanel = $('<div>')
@@ -110,7 +110,7 @@
         });
 
         // Creating popup window to display messages.
-        messageWindow.kendoWindow({
+        $windowContainer.kendoWindow({
             actions: ["Close"],
             modal: true,
             resizable: false,
@@ -118,8 +118,8 @@
             height: 150
         });
 
-        // Storing the instance of the message window.
-        this.messageWindow = messageWindow.data('kendoWindow');
+        // Storing the instance of the popup window.
+        this.popUpWindow = $windowContainer.data('kendoWindow');
     };
 
     // Method to create sub menu.
@@ -192,11 +192,12 @@
 
     // Method to display alert message on popup window. It takes two arguments, message to be displayed and title for the message window.
     View.prototype.displayMessage = function (message, title) {
-        this.messageWindow.content('<span>' + message + '</span>');    // Load content text or HTML.
-        this.messageWindow.setOptions({     // Set title to message window.
+        this.popUpWindow.content('<span>' + message + '</span>');    // Load content text or HTML.
+        this.popUpWindow.element.addClass('ErrorWindow');
+        this.popUpWindow.setOptions({     // Set title to message window.
             title: title || 'Atert!!!'
         });
-        this.messageWindow.open().center();  // Open message window and set position to center.
+        this.popUpWindow.open().center();  // Open message window and set position to center.
     };
 
     // Method to highlight active menu item.
@@ -211,6 +212,15 @@
         var menuType = this.menuElement.data('role');
 
         expandHandler[menuType] && expandHandler[menuType].call(this, path);
+    };
+
+    View.prototype.loadWindow = function (content, title) {
+        this.popUpWindow.content(content);    // Load content text or HTML.
+        this.popUpWindow.element.removeClass('ErrorWindow');
+        this.popUpWindow.setOptions({     // Set title to message window.
+            title: title || 'Atert!!!'
+        });
+        this.popUpWindow.open().center();  // Open message window and set position to center.
     };
 
     return View;
