@@ -5,12 +5,12 @@
         this.APIManager = Args.APIManager;
 
         // Initialize HashHandler.
-        hashHandler.changed.addHandler($.proxy(events.hashChanged, this));
-        hashHandler.start();
+        this.hashHandler.changed.addHandler($.proxy(events.hashChanged, this));
+        this.hashHandler.start();
     };
 
     Controller.prototype.initializePage = function (menuName) {
-        var hashPath = hashHandler.getHash();
+        var hashPath = this.hashHandler.getHash();
 
         // This will load data when page is refreshed and also object path is mentioned in url.
         if (hashPath) {
