@@ -3,6 +3,7 @@
     // Controller class.
     var Controller = function (Args) {
         this.APIManager = Args.APIManager;
+        this.hashHandler = hashHandler;
 
         // Initialize HashHandler.
         this.hashHandler.changed.addHandler($.proxy(events.hashChanged, this));
