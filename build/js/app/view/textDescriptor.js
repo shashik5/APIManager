@@ -1,0 +1,1 @@
+define(["text!../../../data/descriptionText.json"],function(t){var n={},e=function(){var e=JSON.parse(t),i={};return $.each(e,function(t,n){"_"!=t[0]&&(i[t]=$.extend(!0,{},e._CommonDescriptions,n||{}))}),function(t){n=i[t]}},i=function(){this.setDescriptionTextObject=e()};return i.prototype.getDescriptionText=function(t){return n[t]||t},new i});

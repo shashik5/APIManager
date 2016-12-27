@@ -1,0 +1,29 @@
+﻿#
+var dataObj=data.dataObject, secondaryLink=data.parsedLink.secondaryLink,primaryLink=data.parsedLink.primaryLink;
+var headers=primaryLink.split('.');
+var mainNode= headers[0];
+var APIManager=data.APIManager;
+#
+
+<!-- If the dataObj is string and starts with '_CommonDescriptions' then get object value from path mentioned -->
+#_.isString(dataObj) && (dataObj.search('_CommonDescriptions') == 0) && (dataObj=APIManager.APIManagerModel.getObjectByPath(APIManager.APIManagerModel.getSelectedDataObject(), dataObj)) 
+#
+
+<!-- Print headers, i.e first two levels of sub menu items -->
+<div>
+    <h1 class="contentHeader">#=APIManager.APIManagerView.textDescriptor.getDescriptionText(headers[0])#</h1>
+    #if(headers.length>1){#
+    <h2 class="contentHeader">#=APIManager.APIManagerView.textDescriptor.getDescriptionText(headers[1])#</h2>
+    #}#
+</div>
+
+#if(headers.length == 1){#
+    <!-- Print sub menu items as menu if first level sub menu is selected -->
+    #_.each(dataObj,function(value, key){#
+        <span class="listItem"><a href="\\##=mainNode + '.' + key#">#=key#</a></span>
+    #})#
+#}
+else{#
+    <!-- Load itemContent template and pass dataObj as argument to load detailed contents -->
+    #=APIManager.APIManagerView.templates.renderTemplate('DefaultTemplates/itemContent.html',{dataObj: dataObj, APIManager: APIManager})#
+#}#
