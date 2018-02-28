@@ -64,7 +64,7 @@
         var scrollBarColor = 'rgb(196, 196, 196)', messageWindow = $('<div>').addClass('messageWindow');
 
         // Main Header element.
-        $('<h1>').addClass('mainHeader').text(this.APIManager.appSettings.getAppSettings().AppHeader || "API").appendTo($('<div>').addClass('headerContainer').appendTo(this.$container));
+        $('<span>').addClass('mainHeader').text(this.APIManager.appSettings.getAppSettings().AppHeader || "API").appendTo($('<div>').addClass('headerContainer').appendTo(this.$container));
 
         this.mainMenuElement = $('<div>').addClass('mainMenuElement').appendTo(this.$container);
 
