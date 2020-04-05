@@ -8,10 +8,10 @@
     "_APIUsed": "APIs Used",
     "_Prerequisites": "Prerequisites",
     "_FileName": "File Name",
-    "EnterpriseManager": "Enterprise Manager",
-    "CustomizeMobileApps": "Customize Mobile Apps"
+    "Sample_1": "Sample 1",
+    "Sample_2": "Sample 2"
   },
-  "EnterpriseManager": {
+  "Sample_1": {
     "DNAConfiguration": "DNA Configuration",
     "ImportantMethodsInEngine": "Important Methods In Engine",
     "WidgetConfigurations": "Widget Configurations",
@@ -29,7 +29,7 @@
     "ToAddNewLanguage": "To Add a New Language",
     "ToDeleteLanguage": "To Delete a Language"
   },
-  "CustomizeMobileApps": {
+  "Sample_2": {
     "DNAConfiguration": "DNA Configuration",
     "ImportantMethodsInEngine": "Important Methods In Engine",
     "WidgetConfigurations": "Widget Configurations"

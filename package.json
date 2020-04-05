@@ -3,13 +3,15 @@
   "version": "1.0.0",
   "description": "Application to display and manage documentation and api.",
   "main": "index.js",
-  "dependencies": {
+  "devDependencies": {
     "fs": "0.0.1-security",
+    "lite-server": "^2.5.4",
     "minify": "^2.0.12",
     "path": "^0.12.7"
   },
-  "devDependencies": {},
   "scripts": {
+    "compile": "node .\\tools\\publish.js",
+    "start": "npm run compile && lite-server --baseDir=\"dist\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
